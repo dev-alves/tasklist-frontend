@@ -103,14 +103,6 @@ class Task extends Component {
     this.setState(this.getInitialState());
   };
 
-  async componentDidMount() {
-    const tasks = await api.get('/tasks');
-    const { data } = tasks;
-    this.setState({
-      tasks: data,
-    });
-  }
-
   render() {
     const { isOpen, tasks, task } = this.state;
 
