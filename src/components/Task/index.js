@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { MdAdd, MdDeleteForever, MdModeEdit } from 'react-icons/md';
+import { MdDeleteForever, MdModeEdit } from 'react-icons/md';
 import { Form } from 'react-bootstrap';
 
 import { Container, TasksContainer, ContainerButton } from './styles';

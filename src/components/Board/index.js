@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { MdAdd } from 'react-icons/md';
-import { Form } from 'react-bootstrap';
 
 import { Container } from './styles';
 import ModalTask from '../modals/Task';
