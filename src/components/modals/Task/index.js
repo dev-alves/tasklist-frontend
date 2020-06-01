@@ -93,12 +93,12 @@ class Task extends Component {
 
   render() {
     const { titulo, descricao, dataConclusao } = this.state;
-    const { task, onHide } = this.props;
+    const { task, show } = this.props;
 
     return (
       <>
         <Modal
-          {...this.props}
+          show={show}
           size="md"
           aria-labelledby="contained-modal-title-vcenter"
           centered
@@ -111,47 +111,49 @@ class Task extends Component {
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <Col>
-                  <Form.Group controlId="titulo">
-                    <input type="hidden" value={task.id} />
-                    <Row>
-                      <Form.Label>Titulo</Form.Label>
-                      <Form.Control
-                        type="text"
-                        size="sm"
-                        value={titulo}
-                        onChange={this.handleTituloChange}
-                      />
-                    </Row>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group controlId="descricao">
-                    <Row>
-                      <Form.Label>Descrição</Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        rows="3"
-                        size="sm"
-                        value={descricao}
-                        onChange={this.handleDescricaoChange}
-                      />
-                    </Row>
-                  </Form.Group>
-                </Col>
-                <Col sm="4">
-                  <Form.Group controlId="dataConclusao" size="sm">
-                    <Row>
-                      <Form.Label>Data de conclusão</Form.Label>
-                      <Form.Control
-                        type="date"
-                        size="sm"
-                        value={dataConclusao}
-                        onChange={this.handleConclusaoChange}
-                      />
-                    </Row>
-                  </Form.Group>
-                </Col>
+                <Form>
+                  <Col>
+                    <Form.Group controlId="titulo">
+                      <input type="hidden" value={task.id} />
+                      <Row>
+                        <Form.Label>Titulo</Form.Label>
+                        <Form.Control
+                          type="text"
+                          size="sm"
+                          value={titulo}
+                          onChange={this.handleTituloChange}
+                        />
+                      </Row>
+                    </Form.Group>
+                  </Col>
+                  <Col>
+                    <Form.Group controlId="descricao">
+                      <Row>
+                        <Form.Label>Descrição</Form.Label>
+                        <Form.Control
+                          as="textarea"
+                          rows="3"
+                          size="sm"
+                          value={descricao}
+                          onChange={this.handleDescricaoChange}
+                        />
+                      </Row>
+                    </Form.Group>
+                  </Col>
+                  <Col sm="4">
+                    <Form.Group controlId="dataConclusao" size="sm">
+                      <Row>
+                        <Form.Label>Data de conclusão</Form.Label>
+                        <Form.Control
+                          type="date"
+                          size="sm"
+                          value={dataConclusao}
+                          onChange={this.handleConclusaoChange}
+                        />
+                      </Row>
+                    </Form.Group>
+                  </Col>
+                </Form>
               </Modal.Body>
               <Modal.Footer>
                 <Button onClick={(event) => this.handleSubmit(event)}>

@@ -160,7 +160,7 @@ class Task extends Component {
               <FormCheck
                 type="checkbox"
                 checked={task.status === 'FINALIZADO'}
-                onClick={(event) => this.handleCheck(event, task)}
+                onChange={(event) => this.handleCheck(event, task)}
               />
             </Finished>
           </TasksContainer>
