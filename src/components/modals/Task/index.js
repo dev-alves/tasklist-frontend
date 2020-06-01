@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Col, Modal, Button, Form } from 'react-bootstrap';
+import { Col, Modal, Button, Form, Row } from 'react-bootstrap';
 
 import api from '../../../services/api';
 
@@ -96,7 +96,7 @@ class Task extends Component {
     const { task, onHide } = this.props;
 
     return (
-      <Container>
+      <>
         <Modal
           {...this.props}
           size="md"
@@ -111,10 +111,10 @@ class Task extends Component {
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <Form>
-                  <input type="hidden" value={task.id} />
-                  <Form.Row>
-                    <Form.Group as={Col} controlId="titulo">
+                <Col>
+                  <Form.Group controlId="titulo">
+                    <input type="hidden" value={task.id} />
+                    <Row>
                       <Form.Label>Titulo</Form.Label>
                       <Form.Control
                         type="text"
@@ -122,28 +122,36 @@ class Task extends Component {
                         value={titulo}
                         onChange={this.handleTituloChange}
                       />
-                    </Form.Group>
-                  </Form.Row>
-
+                    </Row>
+                  </Form.Group>
+                </Col>
+                <Col>
                   <Form.Group controlId="descricao">
-                    <Form.Label>Descrição</Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      rows="3"
-                      value={descricao}
-                      onChange={this.handleDescricaoChange}
-                    />
+                    <Row>
+                      <Form.Label>Descrição</Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows="3"
+                        size="sm"
+                        value={descricao}
+                        onChange={this.handleDescricaoChange}
+                      />
+                    </Row>
                   </Form.Group>
-                  <Form.Group controlId="dataConclusao">
-                    <Form.Label>Data de conclusão</Form.Label>
-                    <Form.Control
-                      type="date"
-                      size="sm"
-                      value={dataConclusao}
-                      onChange={this.handleConclusaoChange}
-                    />
+                </Col>
+                <Col sm="4">
+                  <Form.Group controlId="dataConclusao" size="sm">
+                    <Row>
+                      <Form.Label>Data de conclusão</Form.Label>
+                      <Form.Control
+                        type="date"
+                        size="sm"
+                        value={dataConclusao}
+                        onChange={this.handleConclusaoChange}
+                      />
+                    </Row>
                   </Form.Group>
-                </Form>
+                </Col>
               </Modal.Body>
               <Modal.Footer>
                 <Button onClick={(event) => this.handleSubmit(event)}>
@@ -155,44 +163,50 @@ class Task extends Component {
           ) : (
             <>
               <Modal.Header closeButton>
-                <Col>
-                  <Modal.Title id="contained-modal-title-vcenter">
-                    Adicionar tarefa
-                  </Modal.Title>
-                </Col>
+                <Modal.Title id="contained-modal-title-vcenter">
+                  Adicionar tarefa
+                </Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <Form>
-                  <Form.Group controlId="titulo">
-                    <Form.Label>Titulo</Form.Label>
-                    <Form.Control
-                      type="text"
-                      size="sm"
-                      value={titulo}
-                      onChange={this.handleTituloChange}
-                    />
-                  </Form.Group>
-                  <Col />
                   <Col>
-                    <Form.Group controlId="descricao">
-                      <Form.Label>Descrição</Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        rows="3"
-                        value={descricao}
-                        onChange={this.handleDescricaoChange}
-                      />
+                    <Form.Group controlId="titulo">
+                      <Row>
+                        <Form.Label>Titulo</Form.Label>
+                        <Form.Control
+                          type="text"
+                          size="sm"
+                          value={titulo}
+                          onChange={this.handleTituloChange}
+                        />
+                      </Row>
                     </Form.Group>
                   </Col>
-                  <Col sm={3}>
-                    <Form.Group controlId="dataConclusao">
-                      <Form.Label>Data de conclusão</Form.Label>
-                      <Form.Control
-                        type="date"
-                        size="sm"
-                        value={dataConclusao}
-                        onChange={this.handleConclusaoChange}
-                      />
+                  <Col>
+                    <Form.Group controlId="descricao">
+                      <Row>
+                        <Form.Label>Descrição</Form.Label>
+                        <Form.Control
+                          as="textarea"
+                          rows="3"
+                          size="sm"
+                          value={descricao}
+                          onChange={this.handleDescricaoChange}
+                        />
+                      </Row>
+                    </Form.Group>
+                  </Col>
+                  <Col sm="4">
+                    <Form.Group controlId="dataConclusao" size="sm">
+                      <Row>
+                        <Form.Label>Data de conclusão</Form.Label>
+                        <Form.Control
+                          type="date"
+                          size="sm"
+                          value={dataConclusao}
+                          onChange={this.handleConclusaoChange}
+                        />
+                      </Row>
                     </Form.Group>
                   </Col>
                 </Form>
@@ -206,7 +220,7 @@ class Task extends Component {
             </>
           )}
         </Modal>
-      </Container>
+      </>
     );
   }
 }

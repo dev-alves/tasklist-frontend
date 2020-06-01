@@ -2,41 +2,57 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  position: relative;
-  flex-wrap: wrap;
   flex: 1;
+  flex-wrap: wrap;
   margin: 20px auto;
-  width: 720px;
+  max-width: 520px;
   margin-top: 20px;
   padding: 15px;
 `;
 
 export const TasksContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   position: relative;
   background: #fff;
   color: '#fff';
-  margin: 20px auto;
-  width: 720px;
-  border-radius: 5px;
-  margin-top: 20px;
+  margin: 50px auto;
+  width: 420px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   padding: 15px;
-  box-shadow: 0 1px 4px 0 rgba(192, 208, 230, 0.8);
-  border-top: 20px solid rgba(230, 236, 245, 0.4);
 
-  h2 {
+  h2,
+  p {
+    display: block;
     width: 100%;
+    word-wrap: break-word;
+  }
+
+  p {
+    margin-bottom: 2px;
   }
 `;
 
 export const ContainerButton = styled.div`
-  position: absolute;
   display: flex;
-  justify-content: space-between;
-  bottom: 20px;
-  right: 20px;
+  justify-content: flex-end;
+  width: 100%;
 
   svg {
+    margin-left: 10px;
     cursor: pointer;
+  }
+`;
+
+export const Finished = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+  margin-top: 10px;
+
+  span {
+    display: block;
+    margin-right: 5px;
   }
 `;

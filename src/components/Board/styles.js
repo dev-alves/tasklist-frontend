@@ -8,8 +8,8 @@ export const Container = styled.div`
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     background: #fff;
     border-radius: 100%;
-    position: fixed;
-    top: 100px;
+    position: absolute;
+    top: 2px;
     right: 50px;
     transition: all 0.3s ease 0s;
 

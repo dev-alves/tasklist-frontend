@@ -51,9 +51,10 @@ class Board extends Component {
           size={50}
           color="#E86D39"
           onClick={() => this.handleModal(true, null)}
+          title="Adicionar nova tarefa"
         />
         <ModalTask
-          task={task}
+          task={null}
           handleaddtask={this.handleTask}
           show={isOpen}
           onHide={() => this.handleModal(false, null)}

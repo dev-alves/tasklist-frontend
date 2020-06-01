@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
-import { MdDeleteForever, MdModeEdit } from 'react-icons/md';
-import { Form } from 'react-bootstrap';
+import { MdDeleteForever, MdEdit } from 'react-icons/md';
+import { FormCheck } from 'react-bootstrap';
+import Moment from 'react-moment';
 
-import { Container, TasksContainer, ContainerButton } from './styles';
+import { Container, ContainerButton, TasksContainer, Finished } from './styles';
 import ModalTask from '../modals/Task';
 import taskEnum from '../../config/task';
 
@@ -55,14 +56,12 @@ class Task extends Component {
     });
   };
 
-  handleDelete = async (id) => {
+  handleDelete = async (event, id) => {
     const result = await api.delete(`/tasks/${id}`);
     const { status } = result;
     const { tasks } = this.state;
-
     if (status === 204) {
       const taskIndex = tasks.findIndex((task) => task.id === id);
-
       if (taskIndex >= 0) {
         tasks.splice(taskIndex, 1);
         this.setState({
@@ -93,10 +92,17 @@ class Task extends Component {
     const isChecked = event.target.checked;
 
     const { id } = task;
-    const result = await api.put(`/tasks/${id}`, {
-      ...task,
-      status: isChecked ? taskEnum.CONCLUIDO : taskEnum.EM_ANDAMENTO,
+    const result = await api.put(`/tasks/status/${id}`, {
+      statusTask: isChecked ? taskEnum.FINALIZADO : taskEnum.NOVA,
     });
+
+    const { tasks } = this.state;
+    const taskId = tasks.findIndex((task) => task.id === result.data.id);
+
+    if (taskId >= 0) {
+      tasks[taskId] = result.data;
+      this.setState({ tasks: [...tasks] });
+    }
   };
 
   resetState = () => {
@@ -117,28 +123,46 @@ class Task extends Component {
 
         {tasks.map((task) => (
           <TasksContainer key={task.id}>
-            <h2>{task.titulo}</h2>
-            <p>{task.descricao}</p>
             <ContainerButton>
-              <MdDeleteForever
-                size={22}
-                color="#black"
-                onClick={() => this.handleDelete(task.id)}
-              />
-              <MdModeEdit
-                size={22}
-                color="#black"
+              <MdEdit
+                size={20}
+                color="#E86D39"
                 onClick={() => this.handleEdit(task)}
+                title="Editar tarefa"
               />
-              {task.status}
-              <Form.Group controlId="checkTask">
-                <Form.Check
-                  type="checkbox"
-                  checked={task.status === taskEnum.CONCLUIDO}
-                  onChange={(event) => this.handleCheck(event, task)}
-                />
-              </Form.Group>
+              <MdDeleteForever
+                size={20}
+                color="#E86D39"
+                onClick={(event) => this.handleDelete(event, task.id)}
+                title="Excluir tarefa"
+              />
             </ContainerButton>
+            <h2>{task.titulo}</h2>
+            <p>Descrição: {task.descricao}</p>
+            <p>Status: {task.status}</p>
+            {task.status === 'FINALIZADO' ? (
+              <p>
+                Finalizado em:{' '}
+                <Moment format="DD/MM/YYYY">{task.dataFinal}</Moment>
+              </p>
+            ) : (
+              <p>
+                Data de conclusão:{' '}
+                <Moment format="DD/MM/YYYY">{task.dataConclusao}</Moment>
+              </p>
+            )}
+            <Finished>
+              {task.status === 'CONCLUIDO' ? (
+                <span>Concluído</span>
+              ) : (
+                <span>Finalizar</span>
+              )}
+              <FormCheck
+                type="checkbox"
+                checked={task.status === 'FINALIZADO'}
+                onClick={(event) => this.handleCheck(event, task)}
+              />
+            </Finished>
           </TasksContainer>
         ))}
       </Container>

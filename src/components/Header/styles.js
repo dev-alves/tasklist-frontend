@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 80px;
   padding: 30px;
   background: #fff;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 
   img {
     max-width: 100%;
